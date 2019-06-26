@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<script>
+
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ctx.strokeStyle = '#BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 100;
+ctx.globalCompositeOperation = 'source-out';
+
+
+let isDrawing = false; //dummy variable for flagging when the drawing should occur
+let lastX = 0; //dummy variable to keep track of the line
+let lastY = 0; //dummy variable to keep track of the line
+let hue = 0;
+let direction = true;
+
+function draw(e) {
+    if (!isDrawing) return; // stops function from running when mouse is not down
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.beginPath(); //we start with an xy coordinate
+    ctx.moveTo(lastX, lastY); //end with an xy coordinate to complete the drawing
+    ctx.lineTo(e.offsetX, e.offsetY); // based on the events move the line to the xy coordinates
+    ctx.stroke(); // see the results on the page
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+    hue++;
+    if(hue >= 360) {
+        hue = 0;
+    }
+    if(ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+        direction = !direction;
+    }
+    if(direction) {
+        ctx.lineWidth++;
+    } else {
+        ctx.lineWidth--;
+    }
+    
+}
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+    });
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
+</script>
+
+<style>
+  html, body {
+    margin: 0;
+  }
+</style>
+
+</body>
+</html>
