@@ -3,3 +3,4 @@
 *.csv
 *.wav
 .ipynb_checkpoints/
+*.mp4
