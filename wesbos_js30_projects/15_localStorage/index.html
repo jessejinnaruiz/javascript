@@ -28,7 +28,50 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || []; //on page load check to see if there is an item in the local storage but if not start with an empty array
+
+  function addItem(e) {
+      e.preventDefault(); //prevents page from refreshing, so that form happens on client side not server side
+      const text = (this.querySelector('[name=item]')).value; //create a text object from the form, ie from the input value
+      const item = { //create an item object with the text from the form
+          text,
+          done: false
+      };
+      items.push(item); //add the item to the items array
+      populateList(items, itemsList);
+      localStorage.setItem('items', JSON.stringify(items)); //we add the item to the local storage as a string
+      this.reset(); //this is the form element so we want to reset it
+  }
+
+  function populateList(plates = [], platesList) { 
+      //pass in any array and place them in the plastesList by rerendering the entire list
+    platesList.innerHTML = plates.map((plate, i) => { 
+        // loop over every item in the array and map the data to return a string
+        return `
+            <li>
+                <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked': ''} />
+                <label for="item${i}">${plate.text}</label>
+            </li>
+        `;
+    }).join('');
+  }
+
+  function toggleDone(e) {
+      // checkboxes will also persist on page refresh by listening for the thing that we want (the input)
+    if(!e.target.matches('input')) return; //skip this unless its an input
+    //set the done to true for the item checked
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done; // flipflop between true and false to change the item property
+    localStorage.setItem('items', JSON.stringify(items)); //we add the item to the local storage as a string
+    populateList(items, itemsList); // on page load create a list of objects to update whats seen on the page
+
+  }
+
+  addItems.addEventListener('submit', addItem); //run the addItem function when someone hits the submit button
+  itemsList.addEventListener('click', toggleDone);
+  populateList(items, itemsList); // on page load create a list of objects
+
 
 </script>
 
