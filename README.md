@@ -1,5 +1,5 @@
-<h1>JavaScript30 - 30 Day JavaScript Challenge</h1>
+<h1>JavaScript Exercises and Projects</h1>
 
-<h3>This <a href="https://github.com/wesbos/JavaScript30">30 Day Challenge Course</a> was created by <a href="https://github.com/wesbos">Wes Bos</a>.</h3>
+<p>This repository contains JavaScript exercises and projects.</p>
 
-<p>This repository contains my work for the JavaScript30 Challenge.</p>
+<li>Here is <a href='https://github.com/jessejinnaruiz/javascript/tree/master/wesbos_js30_projects'>my work</a> for the JavaScript30 Challenge by Wes Bos. This <a href="https://github.com/wesbos/JavaScript30">30 Day Challenge Course</a> was created by <a href="https://github.com/wesbos">Wes Bos</a>.</li>
