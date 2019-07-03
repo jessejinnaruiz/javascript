@@ -35,6 +35,34 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = document.querySelector('h1');
+
+  function shadow(e) {
+    //get width and height of the thing with the shadow
+    const width = hero.offsetWidth;
+    const height = hero.offsetHeight;
+    const walk = 100;
+    //get where the cursor is
+    let { offsetX: x, offsetY: y} = e;
+    if(this !== e.target) {
+      x = x + e.target.offsetLeft; // if someone hovers on the top left corner of the h1 element, then add extra pixels
+      y = y + e.target.offsetTop; // if someone hovers on the top left corner of the hero element, then add extra pixels
+    }
+    const xWalk = Math.round((x / width * walk) - (walk /2));
+    const yWalk = Math.round((y / width * walk) - (walk /2));
+    //how far should the text shadow go (the walk); from 50 to - 50
+    
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7),
+      ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
+      `;
+
+  }
+
+  hero.addEventListener('mousemove', shadow); // listen for the mousemove on the hero element
 </script>
 </body>
 </html>
