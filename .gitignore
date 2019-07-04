@@ -1,6 +1,11 @@
+.DS_Store
 *.png
 *.pdf
 *.csv
 *.wav
 .ipynb_checkpoints/
 *.mp4
+node_modules/
+*.log
+*.idea/
+package-lock.json
