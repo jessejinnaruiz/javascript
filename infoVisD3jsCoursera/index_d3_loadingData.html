@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+
+    <body>
+        <div id="container"></div>
+
+    </body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        let container = d3.select("#container")
+        d3.csv("data_loadingData.csv").then(function (data) {
+            write.("Data is available.")
+        })
+        write("Line after...")
+        function write(text) {
+            container.append("div").text(text)
+        }
+    </script>
+</html>

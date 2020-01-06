@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Intro to D3.js - Changing Content</title>
+
+    </head>
+    <body>
+        <h1>Woop, Changing Content with d3.jssssssss</h1>
+
+        <p class="main-paragraph">This is the first paragraph!</p>
+
+        <p>This is the second paragraph.</p>
+
+        <button onclick="change1()">Change first paragraph</button>
+        <button onclick="change2()">Change all paragraphs</button>
+        <button onclick="change3()">Change with HTML</button>
+        <button onclick="change4()">Change with text</button>
+    </body>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        function change1() {
+            let p = d3.select(".main-paragraph")
+            p.text("New text changed with d3 select method")
+        }
+
+        function change2() {
+            d3.selectAll("p")
+            .text("New text changed with d3 select all method")
+        }
+
+        function change3() {
+            d3.select("p")
+            .html("<b>test</b> and normal text using HTML")
+        }
+
+        function change4() {
+            d3.select("p")
+            .text("<b>test</b> and normal text using d3 text")
+        }
+        
+    </script>
+</html>
